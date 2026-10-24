@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bo8wwx5l331rq"]
+
+[ext_resource type="Texture2D" uid="uid://dabtxf28p0hlk" path="res://assets/models/skeleton_skeleton.png" id="1_v2vd2"]
+
+[resource]
+shading_mode = 0
+albedo_texture = ExtResource("1_v2vd2")
+texture_filter = 0

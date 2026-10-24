@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cbkf7imj0c62o"]
+
+[ext_resource type="PackedScene" uid="uid://be4bihce3t7bd" path="res://assets/models/fence.glb" id="1_smisu"]
+[ext_resource type="Material" uid="uid://c87acxac5d337" path="res://assets/materials/palletemat.tres" id="2_ldgmp"]
+
+[node name="fence" unique_id=517359645 instance=ExtResource("1_smisu")]
+
+[node name="Fence" parent="." index="0" unique_id=1117760503]
+material_override = ExtResource("2_ldgmp")
