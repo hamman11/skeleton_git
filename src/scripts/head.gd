@@ -7,6 +7,9 @@ var mesh: Node3D
 var is_thrown: bool = false
 var original_transform: Transform3D
 @export var skeleton_mesh: Node3D
+@export var head_hit_sfx: AudioStreamPlayer3D
+@export var throw: AudioStreamPlayer3D
+@export var teleport: AudioStreamPlayer3D
 
 const MY_SCENE = preload("res://src/scenes/death_anim.tscn")
 
@@ -22,6 +25,11 @@ func _ready() -> void:
 
 	freeze = true
 	sleeping = true
+	contact_monitor = true
+	max_contacts_reported = 10
+
+func _on_body_entered(_body: Node) -> void:
+	head_hit_sfx.play()
 
 func throw_head(direction: Vector3) -> void:
 	if is_thrown:
@@ -33,7 +41,7 @@ func throw_head(direction: Vector3) -> void:
 
 	is_thrown = true
 	reparent(get_tree().current_scene, true)
-
+	throw.play()
 	freeze = false
 	sleeping = false
 	linear_velocity = Vector3.ZERO
@@ -49,7 +57,8 @@ func throw_head(direction: Vector3) -> void:
 func return_to_player() -> void:
 	if not player:
 		return
-		
+	
+	teleport.play()
 	var head_position := global_position
 	var player_position := player.global_position
 	skeleton_mesh.visible = false

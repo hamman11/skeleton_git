@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dw667m6je6q6s"]
+
+[ext_resource type="Script" uid="uid://d176j13kg304b" path="res://src/scenes/chunck.gd" id="1_avr3g"]
+[ext_resource type="PackedScene" uid="uid://cfhyy1gvip1od" path="res://assets/models/seed.glb" id="1_i7dnp"]
+[ext_resource type="PackedScene" uid="uid://dc0chuli65qww" path="res://src/scenes/ground_warning.tscn" id="2_n11vr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+size = Vector3(0.55444336, 0.2639618, 1)
+
+[node name="chunck" type="Area3D" unique_id=193893884 groups=["pumpkin"]]
+script = ExtResource("1_avr3g")
+gravity_strength = 19.6
+warning_scene = ExtResource("2_n11vr")
+
+[node name="seed2" parent="." unique_id=895764414 instance=ExtResource("1_i7dnp")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1736880375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009155273, 0.014778137, 0)
+shape = SubResource("BoxShape3D_yf5fn")

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://41oyl83feai4"]
+
+[ext_resource type="Script" uid="uid://bpxyiqncq7a0c" path="res://src/scenes/death_screen.gd" id="1_l20v2"]
+
+[node name="DeathScreen" type="Control" unique_id=910724399]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l20v2")
+
+[node name="Button" type="Button" parent="." unique_id=173338075]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 240.0
+offset_right = 897.0
+offset_bottom = 415.0
+theme_override_font_sizes/font_size = 122
+text = " Restart "
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

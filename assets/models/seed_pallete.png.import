@@ -7,9 +7,6 @@ path="res://.godot/imported/seed_pallete.png-b6fd8bd46a409c3e1f2244b61ff9ae43.ct
 metadata={
 "vram_texture": false
 }
-generator_parameters={
-"md5": "3b95c541eb3019ebdac83a6fb9925caf"
-}
 
 [deps]
 
@@ -26,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

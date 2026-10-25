@@ -56,8 +56,10 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_f30q2"]
 size = Vector3(0.44369507, 0.1579361, 0.6732178)
 
-[node name="projectile" type="Area3D" unique_id=1485271856 groups=["pumpkin"]]
+[node name="projectile" type="Area3D" unique_id=1485271856 node_paths=PackedStringArray("mesh") groups=["pumpkin"]]
 script = ExtResource("1_f30q2")
+speed = 20.0
+mesh = NodePath("seed3/seed")
 
 [node name="seed3" type="Node3D" parent="." unique_id=895764414]
 

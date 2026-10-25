@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bua3o3iqvcb5i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6j6"]
+shading_mode = 0
+albedo_color = Color(0.8627451, 0.6862745, 0.5686275, 1)
+
+[sub_resource type="Curve" id="Curve_ya6j6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7432433, 1), -0.50201386, -0.50201386, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ya6j6"]
+curve = SubResource("Curve_ya6j6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ya6j6"]
+spread = 180.0
+flatness = 0.505
+initial_velocity_min = 6.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, -25, 0)
+scale_min = 0.29999998
+scale_max = 0.39999998
+scale_curve = SubResource("CurveTexture_ya6j6")
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+radius = 0.125
+height = 0.25
+radial_segments = 6
+rings = 3
+
+[node name="hitparticles" type="GPUParticles3D" unique_id=390239092]
+material_override = SubResource("StandardMaterial3D_ya6j6")
+emitting = false
+amount = 24
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ya6j6")
+draw_pass_1 = SubResource("SphereMesh_g4v7s")

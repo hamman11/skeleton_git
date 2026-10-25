@@ -2,11 +2,13 @@ extends Camera3D
 
 @export var shake_intensity: float = 0.15
 @export var shake_duration: float = 0.2
+@onready var anim: AnimationPlayer = $"../AnimationPlayer"
 
 var shake_time: float = 0.0
 var original_position: Vector3
 
 func _ready() -> void:
+	anim.play("zoomed")
 	original_position = position
 
 func _process(delta: float) -> void:
@@ -31,3 +33,6 @@ func shake(intensity: float = -1.0, duration: float = -1.0) -> void:
 	shake_intensity = intensity
 	shake_duration = duration
 	shake_time = duration
+	
+func zoom_out_anim():
+	anim.play("zoom_out")

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://djv4wxew2ibnw"]
+
+[ext_resource type="PackedScene" uid="uid://v3fkbevnymkb" path="res://assets/models/skeleton.glb" id="1_w8bqr"]
+
+[node name="skeleton" unique_id=2115549129 instance=ExtResource("1_w8bqr")]
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(893844975) index="0" unique_id=255733109]
+bones/0/scale = Vector3(1, 0.99772, 0.99999994)
+bones/2/position = Vector3(-0.26750138, 0.33117902, -4.4496915e-08)
+bones/2/rotation = Quaternion(0.0018772414, -0.007875847, 0.973236, 0.2296653)
+bones/3/rotation = Quaternion(4.8844755e-05, -0.006599873, 0.9999475, 0.0078436015)
+bones/4/position = Vector3(0.26047677, 0.33258396, -4.468559e-08)
+bones/4/rotation = Quaternion(2.0325037e-05, -0.00022359223, 0.98824704, -0.15286501)
+bones/5/rotation = Quaternion(-0.00020468564, -0.0072808173, 0.9996162, -0.026729824)
+
+[node name="Bone_001_R" parent="Armature/Skeleton3D" index="0" unique_id=1960212023]
+transform = Transform3D(-0.89449996, -0.44706655, 3.638072e-05, 0.44598794, -0.8923443, -0.016155409, 0.0072715823, -0.014467784, 0.9998688, -0.26750138, -0.26434496, -7.6376416e-08)
+
+[node name="Bone_002_R" parent="Armature/Skeleton3D" index="1" unique_id=170356278]
+transform = Transform3D(-0.99987686, -0.015687024, -5.849164e-06, 0.01564997, -0.9975103, -0.013169662, 0.00020121694, -0.013198226, 0.9999128, -0.19257231, -0.6061303, -9.977517e-09)
+
+[node name="Bone_001_L" parent="Armature/Skeleton3D" index="2" unique_id=46225746]
+transform = Transform3D(-0.9532638, 0.3021368, 0.00010853118, -0.30144763, -0.9510912, -0.00043466175, -2.816855e-05, -0.00044808604, 0.9999998, 0.26047677, -0.2629432, -7.6648654e-08)
+
+[node name="Bone_002_L" parent="Armature/Skeleton3D" index="3" unique_id=1586983799]
+transform = Transform3D(-0.9985727, 0.053442106, -1.9984232e-05, -0.05331441, -0.99618846, -0.014533713, -0.0007984423, -0.014545041, 0.99989384, 0.19257231, -0.6061303, -9.977517e-09)
+
+[node name="Bone" parent="Armature/Skeleton3D" index="4" unique_id=1593974408]
+transform = Transform3D(1, -7.0892283e-15, -1.4210855e-14, 7.1054274e-15, 0.99772, 5.960465e-08, -1.4210855e-14, -5.946876e-08, 0.99999994, -1.4525299e-15, -0.5947689, -1.2184706e-08)
