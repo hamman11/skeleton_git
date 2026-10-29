@@ -2,7 +2,8 @@
 class_name Player
 extends CharacterBody3D
 
-const max_speed := 8
+const start_max_speed := 8
+var max_speed := 8
 const acceleration := 14
 const friction := 8
 const hit_particles = preload("res://src/scenes/hitparticles.tscn")
@@ -58,6 +59,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process(_delta: float) -> void:
+	if Input.is_action_pressed("throw"):
+		max_speed = 1
 	if not is_alive or not dmg_timer.is_stopped():
 		return
 	for i in range(pumpkins_touching.size() - 1, -1, -1):
@@ -70,6 +73,7 @@ func _process(_delta: float) -> void:
 		
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("throw") and event.is_released() and is_alive:
+		max_speed = start_max_speed
 		head.throw_head(move_direction)
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
