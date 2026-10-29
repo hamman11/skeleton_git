@@ -1071,7 +1071,6 @@ anim = NodePath("Mesh/pivot/skeleton/AnimationPlayer")
 anim_death = NodePath("Death/AnimationPlayer")
 head = NodePath("Mesh/Head")
 mesh = NodePath("Mesh")
-pumpkin_knockback = 70.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=543424284]
 
@@ -1400,4 +1399,3 @@ grow_vertical = 2
 mouse_filter = 2
 
 [connection signal="body_entered" from="Mesh/Head" to="Mesh/Head" method="_on_body_entered"]
-[connection signal="area_entered" from="Area3D" to="." method="_on_detection_area_body_entered"]

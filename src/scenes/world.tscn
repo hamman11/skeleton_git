@@ -719,12 +719,10 @@ glow_enabled = true
 shader = ExtResource("3_dq5wt")
 shader_parameter/resolution_x = 640
 shader_parameter/resolution_y = 480
-shader_parameter/color_bit_depth = 32
 shader_parameter/dither_strength = 0.0
 shader_parameter/jitter_amount = 0.002
 shader_parameter/jitter_speed = 1.2
 shader_parameter/jitter_frequency = 180.0
-shader_parameter/chromatic_aberration_strength = 0.0
 shader_parameter/vignette_strength = 0.1950000092625
 shader_parameter/vignette_radius = 0.9
 
@@ -751,14 +749,13 @@ state1_health = 5
 state2_health = 7
 state3_health = 8
 
-[node name="state1" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=461022142 node_paths=PackedStringArray("player", "anim", "camera")]
+[node name="state1" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=461022142 node_paths=PackedStringArray("anim", "camera")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.2311534, -6.577467)
 collision_layer = 5
 collision_mask = 5
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("2_k5joq")
-player = NodePath("")
 anim = NodePath("pumpkinv2/AnimationPlayer")
 bullet_scene = ExtResource("4_vvusi")
 camera = NodePath("../../../CameraHolder/Camera3D")
@@ -794,14 +791,13 @@ autostart = true
 transform = Transform3D(-0.1, 0, 1.509958e-08, 0, 0.1, 0, -1.509958e-08, 0, -0.1, 0, 1.4766266, 0)
 shape = SubResource("ConvexPolygonShape3D_vqtul")
 
-[node name="state2" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=263459788 node_paths=PackedStringArray("player", "anim", "pos_a", "pos_b", "camera")]
+[node name="state2" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=263459788 node_paths=PackedStringArray("anim", "pos_a", "pos_b", "camera")]
 transform = Transform3D(1.295, 0, 0, 0, 1.295, 0, 0, 0, 1.295, 0, 1.7961463, -5.984256)
 collision_layer = 5
 collision_mask = 5
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("6_k37mw")
-player = NodePath("")
 anim = NodePath("pumpkinv2/AnimationPlayer")
 pos_a = NodePath("../Points/A")
 pos_b = NodePath("../Points/B")
@@ -839,14 +835,13 @@ autostart = true
 transform = Transform3D(-0.1, 0, 1.509958e-08, 0, 0.1, 0, -1.509958e-08, 0, -0.1, 0, 1.4766266, 0)
 shape = SubResource("ConvexPolygonShape3D_vqtul")
 
-[node name="sad_pumpkin" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=1229161331 node_paths=PackedStringArray("player", "anim")]
+[node name="sad_pumpkin" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=1229161331 node_paths=PackedStringArray("anim")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -5.552042, 0.6916679, -4.4300985)
 collision_layer = 5
 collision_mask = 5
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("7_mxnng")
-player = NodePath("")
 anim = NodePath("sad_pumpkin2/AnimationPlayer")
 speed = 3.0
 rotation_speed = 36.0
@@ -890,14 +885,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.796, -5.9841323)
 [node name="B" type="Marker3D" parent="Pumpkin/StateMachine/Points" unique_id=1403640581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.796, 5.262406)
 
-[node name="state3" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=739076331 node_paths=PackedStringArray("player", "anim", "barth_anim", "gutsv_2", "anim_guts", "camera")]
+[node name="state3" type="CharacterBody3D" parent="Pumpkin/StateMachine" unique_id=739076331 node_paths=PackedStringArray("anim", "barth_anim", "gutsv_2", "anim_guts", "camera")]
 transform = Transform3D(-9.2449596e-08, 0, 2.1150002, 0, 2.1150002, 0, -2.1150002, 0, -9.2449596e-08, -0.29685688, 3.0402355, -3.7120004)
 collision_layer = 5
 collision_mask = 5
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("7_urb0p")
-player = NodePath("")
 anim = NodePath("big_pumpkin2/AnimationPlayer")
 barth_anim = NodePath("barth/AnimationPlayer")
 gutsv_2 = NodePath("../gutsv2")
