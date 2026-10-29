@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://d4mambpd8uaw5" path="res://assets/sfx/throw.wav" id="11_ybrxc"]
 [ext_resource type="AudioStream" uid="uid://b0ethufmvpcc8" path="res://assets/sfx/teleport.wav" id="12_fkrvq"]
 [ext_resource type="AudioStream" uid="uid://cw4uc1lfteest" path="res://assets/sfx/explosion.wav" id="13_op12o"]
+[ext_resource type="Shader" uid="uid://ddv2y6ifedx5g" path="res://src/shaders/scaryshader.gdshader" id="14_hhiii"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cusn3"]
 height = 1.4870605
@@ -1050,6 +1051,17 @@ _data = {
 radius = 0.54833984
 height = 1.6159668
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpkk7"]
+shader = ExtResource("14_hhiii")
+shader_parameter/resolution_x = 640
+shader_parameter/resolution_y = 480
+shader_parameter/dither_strength = 0.01
+shader_parameter/jitter_amount = 0.002
+shader_parameter/jitter_speed = 1.2
+shader_parameter/jitter_frequency = 180.0
+shader_parameter/vignette_strength = 0.1950000092625
+shader_parameter/vignette_radius = 0.9
+
 [node name="player" type="CharacterBody3D" unique_id=1979350120 node_paths=PackedStringArray("anim", "anim_death", "head", "mesh") groups=["player"]]
 axis_lock_linear_y = true
 motion_mode = 1
@@ -1060,6 +1072,50 @@ anim_death = NodePath("Death/AnimationPlayer")
 head = NodePath("Mesh/Head")
 mesh = NodePath("Mesh")
 pumpkin_knockback = 70.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=543424284]
+
+[node name="shadow" type="HBoxContainer" parent="CanvasLayer" unique_id=333805156]
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 504.0
+offset_bottom = 121.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/shadow" unique_id=122794474]
+layout_mode = 2
+texture = ExtResource("7_5acq0")
+expand_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/shadow" unique_id=1201996604]
+layout_mode = 2
+texture = ExtResource("7_5acq0")
+expand_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/shadow" unique_id=59469435]
+layout_mode = 2
+texture = ExtResource("7_5acq0")
+expand_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=935616881]
+offset_left = 14.0
+offset_top = 12.0
+offset_right = 504.0
+offset_bottom = 121.0
+
+[node name="heart" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=889615327]
+layout_mode = 2
+texture = ExtResource("8_5h06g")
+expand_mode = 3
+
+[node name="heart2" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=1620477282]
+layout_mode = 2
+texture = ExtResource("8_5h06g")
+expand_mode = 3
+
+[node name="heart3" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=1441491097]
+layout_mode = 2
+texture = ExtResource("8_5h06g")
+expand_mode = 3
 
 [node name="collision" type="CollisionShape3D" parent="." unique_id=1340979152]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2244873, 0)
@@ -1299,50 +1355,6 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.10153901
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Death" unique_id=831007999]
 libraries/ = SubResource("AnimationLibrary_0qy4j")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=543424284]
-
-[node name="shadow" type="HBoxContainer" parent="CanvasLayer" unique_id=333805156]
-offset_left = 14.0
-offset_top = 12.0
-offset_right = 504.0
-offset_bottom = 121.0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/shadow" unique_id=122794474]
-layout_mode = 2
-texture = ExtResource("7_5acq0")
-expand_mode = 3
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/shadow" unique_id=1201996604]
-layout_mode = 2
-texture = ExtResource("7_5acq0")
-expand_mode = 3
-
-[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/shadow" unique_id=59469435]
-layout_mode = 2
-texture = ExtResource("7_5acq0")
-expand_mode = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=935616881]
-offset_left = 14.0
-offset_top = 12.0
-offset_right = 504.0
-offset_bottom = 121.0
-
-[node name="heart" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=889615327]
-layout_mode = 2
-texture = ExtResource("8_5h06g")
-expand_mode = 3
-
-[node name="heart2" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=1620477282]
-layout_mode = 2
-texture = ExtResource("8_5h06g")
-expand_mode = 3
-
-[node name="heart3" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=1441491097]
-layout_mode = 2
-texture = ExtResource("8_5h06g")
-expand_mode = 3
-
 [node name="Area3D" type="Area3D" parent="." unique_id=1728056715]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1153635057]
@@ -1365,6 +1377,27 @@ stream = ExtResource("12_fkrvq")
 
 [node name="death_sfx" type="AudioStreamPlayer3D" parent="SFX" unique_id=132508103]
 stream = ExtResource("13_op12o")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=94251119]
+
+[node name="Canvas" type="Control" parent="CanvasLayer2" unique_id=2143432935]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Shader" type="ColorRect" parent="CanvasLayer2/Canvas" unique_id=1996809335]
+material = SubResource("ShaderMaterial_wpkk7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="body_entered" from="Mesh/Head" to="Mesh/Head" method="_on_body_entered"]
 [connection signal="area_entered" from="Area3D" to="." method="_on_detection_area_body_entered"]

@@ -15,22 +15,17 @@ var state_machine: Node3D
 @export var rotation_speed: float = 24
 
 func _ready() -> void:
-	visible = false
-	process_mode = CharacterBody3D.PROCESS_MODE_DISABLED
-	anim.play_backwards("Jump")
-	state_machine = get_tree().get_first_node_in_group("state")
-	
-func start_state():
 	visible = true
 	anim.play("Jump")
 	await anim.animation_finished
 	anim.play("Roll")
 	is_chasing = true
+	
 
 func _process(delta: float) -> void:
 	if not player:
 		return
-
+		
 	var direction := player.global_position - global_position
 	direction.y = 0.0
 
@@ -61,10 +56,3 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	
-func end_state():
-	is_alive = false
-	is_chasing = false
-	anim.stop()
-	anim.play_backwards("Jump")
-	await anim.animation_finished
-	queue_free()
