@@ -26,7 +26,6 @@ var current_health := 3
 var hearts_list: Array[TextureRect] = []
 var pumpkins_touching: Array[Node3D] = []
 var is_alive := true
-var can_throw := true
 var move_direction := Vector3.FORWARD
 var has_moved := false
 
@@ -68,9 +67,9 @@ func _process(_delta: float) -> void:
 			continue
 		damage(pumpkin_damage, pumpkin, pumpkin_knockback)
 		return
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("throw") and can_throw and is_alive:
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action("throw") and event.is_released() and is_alive:
 		head.throw_head(move_direction)
 
 func _on_detection_area_body_entered(body: Node3D) -> void:
