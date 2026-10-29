@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://dy1wel6pajt53"]
+
+[ext_resource type="PackedScene" uid="uid://dad8ktf3qkbnf" path="res://src/scenes/player.tscn" id="1_gojnm"]
+[ext_resource type="Script" uid="uid://bdopad0717ls1" path="res://src/scripts/camera.gd" id="2_1c2mv"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
+
+[sub_resource type="Animation" id="Animation_k37mw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraHolder/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 14.682488, 15.958319)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraHolder/Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.811527, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraHolder/Camera3D:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [53.4]
+}
+
+[sub_resource type="Animation" id="Animation_vvusi"]
+resource_name = "zoom_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraHolder/Camera3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 13.765387, 15.967625), Vector3(0, 14.682488, 15.958319)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraHolder/Camera3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.7657451, 0, 0), Vector3(-0.811527, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraHolder/Camera3D:fov")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [44.9, 53.4]
+}
+
+[sub_resource type="Animation" id="Animation_urb0p"]
+resource_name = "zoomed"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraHolder/Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.7657451, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraHolder/Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 13.765387, 15.967625)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CameraHolder/Camera3D:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [44.9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f7g2b"]
+_data = {
+&"RESET": SubResource("Animation_k37mw"),
+&"zoom_out": SubResource("Animation_vvusi"),
+&"zoomed": SubResource("Animation_urb0p")
+}
+
+[node name="Test_Level" type="Node3D" unique_id=2098342019]
+
+[node name="player" parent="." unique_id=1979350120 instance=ExtResource("1_gojnm")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1639914837]
+transform = Transform3D(9.004156, 0, 0, 0, 1, 0, 0, 0, 9.004156, 0, -0.48349524, 0)
+mesh = SubResource("PlaneMesh_g4v7s")
+
+[node name="CameraHolder" type="Node3D" parent="." unique_id=523219607]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraHolder" unique_id=1361115507]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_f7g2b")
+
+[node name="Camera3D" type="Camera3D" parent="CameraHolder" unique_id=764597195]
+transform = Transform3D(1, 0, 0, 0, 0.68839157, 0.7253391, 0, -0.7253391, 0.68839157, 0, 14.682488, 15.958319)
+fov = 53.4
+script = ExtResource("2_1c2mv")

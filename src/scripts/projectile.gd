@@ -21,3 +21,4 @@ func _physics_process(delta: float) -> void:
 	move_dir = move_dir.normalized() 
 
 	global_position -= move_dir * speed * delta
+	

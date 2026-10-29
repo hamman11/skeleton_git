@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="skeleton"
-run/main_scene="uid://opv82hg04slc"
+run/main_scene="uid://dy1wel6pajt53"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -28,7 +28,7 @@ window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GPUTrail-main/plugin.cfg")
+enabled=PackedStringArray("res://addons/GPUTrail-main/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
 
 [global_group]
 

@@ -13,17 +13,14 @@ const hit_particles = preload("res://src/scenes/hitparticles.tscn")
 @export var anim_death: AnimationPlayer
 @export var head: RigidBody3D
 @export var mesh: Node3D
-@export var camera: Camera3D
-@export var state_machine: Node3D
 @export var pumpkin_damage := 1
 @export var pumpkin_knockback := 80.0
 
 @onready var dmg_timer: Timer = $DamageCooldown
 @onready var death_anim: Node3D = $Death
 @onready var detection_area: Area3D = $Area3D
-@onready var hit_sfx: AudioStreamPlayer3D = $SFX/hit_sfx
-@onready var death_sfx: AudioStreamPlayer3D = $SFX/death_sfx
 
+var camera: Camera3D
 var max_health := 3
 var current_health := 3
 var hearts_list: Array[TextureRect] = []
@@ -34,6 +31,7 @@ var move_direction := Vector3.FORWARD
 var has_moved := false
 
 func _ready() -> void:
+	camera = get_viewport().get_camera_3d()
 	for child in $CanvasLayer/HBoxContainer.get_children():
 		if child is TextureRect:
 			hearts_list.append(child)
@@ -69,7 +67,6 @@ func _process(_delta: float) -> void:
 			pumpkins_touching.remove_at(i)
 			continue
 		damage(pumpkin_damage, pumpkin, pumpkin_knockback)
-		hit_sfx.play()
 		return
 
 func _input(event: InputEvent) -> void:
@@ -83,7 +80,6 @@ func _on_detection_area_body_entered(body: Node3D) -> void:
 		pumpkins_touching.append(body)
 	if dmg_timer.is_stopped():
 		damage(pumpkin_damage, body, pumpkin_knockback)
-		hit_sfx.play()
 
 func _on_detection_area_body_exited(body: Node3D) -> void:
 	pumpkins_touching.erase(body)
@@ -117,15 +113,12 @@ func death() -> void:
 	mesh.visible = false
 	head.visible = false
 	death_anim.visible = true
-	death_sfx.play()
 	var screen = death_screen.instantiate()
 	get_tree().current_scene.add_child(screen)
 	anim_death.play("deathanim")
-	state_machine.player_died()
 
 func _on_player_first_move() -> void:
 	camera.zoom_out_anim()
-	state_machine.start_state1()
 
 func update_heart_display() -> void:
 	for i in range(hearts_list.size()):
