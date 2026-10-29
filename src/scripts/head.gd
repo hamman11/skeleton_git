@@ -1,82 +1,91 @@
-extends RigidBody3D
+
+extends CharacterBody3D
 
 @export var force_magnitude: float = 10.0
-
-var player: CharacterBody3D
-var mesh: Node3D
-var is_thrown: bool = false
-var original_transform: Transform3D
+@export var turn_speed: float = 2.5
+@export var gravity_strength: float = 9.8
 @export var skeleton_mesh: Node3D
 @export var head_hit_sfx: AudioStreamPlayer3D
 @export var throw: AudioStreamPlayer3D
 @export var teleport: AudioStreamPlayer3D
 
-const MY_SCENE = preload("res://src/scenes/death_anim.tscn")
+var player: Player
+var mesh: Node3D
+var is_thrown := false
+var original_transform: Transform3D
 
-func spawn_at_location(target_position: Vector3):
-	var instance = MY_SCENE.instantiate()
-	get_parent().get_parent().add_child(instance)
-	instance.global_position = target_position
-	
-func _ready() -> void:
-	player = get_parent().get_parent() as CharacterBody3D
+func setup_player(p: Player) -> void:
+	player = p
 	mesh = get_parent() as Node3D
 	original_transform = transform
 
-	freeze = true
-	sleeping = true
-	contact_monitor = true
-	max_contacts_reported = 10
+func _ready() -> void:
+	set_physics_process(false)
 
-func _on_body_entered(_body: Node) -> void:
-	head_hit_sfx.play()
-
-func throw_head(direction: Vector3) -> void:
-	if is_thrown:
-		return_to_player()
+func _physics_process(delta: float) -> void:
+	if not is_thrown:
 		return
 
-	if not player:
+	var steering := Input.get_action_strength("right") - Input.get_action_strength("left")
+	rotation.y += steering * turn_speed * delta
+
+	var forward := -global_transform.basis.z.normalized()
+	velocity.x = forward.x * force_magnitude
+	velocity.z = forward.z * force_magnitude
+	velocity.y -= gravity_strength * delta
+
+	move_and_slide()
+
+	for i in range(get_slide_collision_count()):
+		var collision := get_slide_collision(i)
+		if collision.get_collider() != player and not head_hit_sfx.playing:
+			head_hit_sfx.play()
+
+func throw_head(direction: Vector3) -> void:
+	if is_thrown or not is_instance_valid(player):
 		return
 
 	is_thrown = true
-	reparent(get_tree().current_scene, true)
 	throw.play()
-	freeze = false
-	sleeping = false
-	linear_velocity = Vector3.ZERO
-	angular_velocity = Vector3.ZERO
 
 	direction.y = 0.0
 
 	if direction.length_squared() > 0.001:
-		apply_central_impulse(direction.normalized() * force_magnitude)
+		direction = direction.normalized()
+		global_rotation.y = atan2(-direction.x, -direction.z) + PI
 
+	reparent(get_tree().current_scene, true)
+
+	mesh.visible = false
+
+	if player.body_collision:
+		player.body_collision.set_deferred("disabled", true)
+
+	velocity = Vector3.ZERO
+	set_physics_process(true)
 	mesh.release_anim()
 
 func return_to_player() -> void:
-	if not player:
+	if not is_thrown or not is_instance_valid(player):
 		return
-	
+
 	teleport.play()
-	var head_position := global_position
-	var player_position := player.global_position
-	skeleton_mesh.visible = false
-	spawn_at_location(player_position)
 
-	player.global_position = Vector3(
-		head_position.x,
-		player_position.y,
-		head_position.z
-	)
+	var return_position := global_position
+	return_position.y = player.global_position.y
+	player.global_position = return_position
 
-	freeze = true
-	linear_velocity = Vector3.ZERO
-	angular_velocity = Vector3.ZERO
-	sleeping = true
+	velocity = Vector3.ZERO
+	set_physics_process(false)
 
 	reparent(mesh, false)
 	transform = original_transform
-	mesh.return_anim()
 
+	mesh.visible = true
+	skeleton_mesh.visible = true
+
+	if player.body_collision:
+		player.body_collision.set_deferred("disabled", false)
+
+	mesh.return_anim()
 	is_thrown = false

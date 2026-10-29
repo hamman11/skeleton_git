@@ -1058,7 +1058,7 @@ shader_parameter/vignette_radius = 0.9
 radius = 0.54833984
 height = 1.6159668
 
-[node name="player" type="CharacterBody3D" unique_id=1979350120 node_paths=PackedStringArray("anim", "anim_death", "head", "mesh") groups=["player"]]
+[node name="player" type="CharacterBody3D" unique_id=1979350120 node_paths=PackedStringArray("anim", "anim_death", "head", "mesh", "body_collision") groups=["player"]]
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_lsi8j")
@@ -1067,6 +1067,7 @@ anim = NodePath("Mesh/pivot/skeleton/AnimationPlayer")
 anim_death = NodePath("Death/AnimationPlayer")
 head = NodePath("Mesh/Head")
 mesh = NodePath("Mesh")
+body_collision = NodePath("collision")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=543424284]
 
@@ -1122,11 +1123,12 @@ pivot = NodePath("pivot")
 head_mesh = NodePath("Head/head2")
 skeleton_mesh = NodePath("pivot/skeleton")
 
-[node name="Head" type="RigidBody3D" parent="Mesh" unique_id=1112823084 node_paths=PackedStringArray("skeleton_mesh", "head_hit_sfx", "throw", "teleport") groups=["head"]]
+[node name="Head" type="CharacterBody3D" parent="Mesh" unique_id=1912905565 node_paths=PackedStringArray("skeleton_mesh", "head_hit_sfx", "throw", "teleport") groups=["head"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46804023, 0)
 collision_layer = 4
 collision_mask = 4
 axis_lock_linear_y = true
+motion_mode = 1
 script = ExtResource("4_myy50")
 force_magnitude = 25.0
 skeleton_mesh = NodePath("../pivot/skeleton")
@@ -1135,7 +1137,7 @@ throw = NodePath("../../SFX/throw")
 teleport = NodePath("../../SFX/teleport")
 
 [node name="head2" parent="Mesh/Head" unique_id=558492638 instance=ExtResource("5_usugt")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, -0.23688847, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23688847, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Head" unique_id=1033008001 groups=["head"]]
 transform = Transform3D(0.71, 0, 0, 0, 0.71, 0, 0, 0, 0.71, 0, 0.077031374, 0)
@@ -1145,7 +1147,7 @@ shape = SubResource("SphereShape3D_g4v7s")
 transform = Transform3D(1, 0, 0, 0, 0.8150971, 0, 0, 0, 1, 0, -0.5364123, 0)
 
 [node name="skeleton" type="Node3D" parent="Mesh/pivot" unique_id=606985448]
-transform = Transform3D(-4.371138e-08, 0, -0.9999999, 0, 0.99999994, 0, 0.9999999, 0, -4.371138e-08, 0, 0.8546294, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, 0.99999994, 0, 0, 0, 0.9999999, 0, 0.8546294, 0)
 
 [node name="Armature" type="Node3D" parent="Mesh/pivot/skeleton" unique_id=1410401854]
 
