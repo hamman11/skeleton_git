@@ -18,10 +18,6 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cusn3"]
 height = 1.4870605
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v4rts"]
-friction = 0.0
-bounce = 1.0
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
 radius = 0.6791354
 
@@ -1047,10 +1043,6 @@ _data = {
 &"deathanim": SubResource("Animation_ya6j6")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
-radius = 0.54833984
-height = 1.6159668
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wpkk7"]
 shader = ExtResource("14_hhiii")
 shader_parameter/resolution_x = 640
@@ -1061,6 +1053,10 @@ shader_parameter/jitter_speed = 1.2
 shader_parameter/jitter_frequency = 180.0
 shader_parameter/vignette_strength = 0.1950000092625
 shader_parameter/vignette_radius = 0.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+radius = 0.54833984
+height = 1.6159668
 
 [node name="player" type="CharacterBody3D" unique_id=1979350120 node_paths=PackedStringArray("anim", "anim_death", "head", "mesh") groups=["player"]]
 axis_lock_linear_y = true
@@ -1126,13 +1122,11 @@ pivot = NodePath("pivot")
 head_mesh = NodePath("Head/head2")
 skeleton_mesh = NodePath("pivot/skeleton")
 
-[node name="Head" type="RigidBody3D" parent="Mesh" unique_id=1408542395 node_paths=PackedStringArray("skeleton_mesh", "head_hit_sfx", "throw", "teleport") groups=["head"]]
+[node name="Head" type="RigidBody3D" parent="Mesh" unique_id=1112823084 node_paths=PackedStringArray("skeleton_mesh", "head_hit_sfx", "throw", "teleport") groups=["head"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46804023, 0)
 collision_layer = 4
 collision_mask = 4
 axis_lock_linear_y = true
-physics_material_override = SubResource("PhysicsMaterial_v4rts")
-gravity_scale = 0.0
 script = ExtResource("4_myy50")
 force_magnitude = 25.0
 skeleton_mesh = NodePath("../pivot/skeleton")
@@ -1162,45 +1156,45 @@ bones/0/rest = Transform3D(1, -7.105427e-15, 2.3841854e-07, -7.1054274e-15, 0.99
 bones/0/enabled = true
 bones/0/position = Vector3(0, -0.7991943, 0)
 bones/0/rotation = Quaternion(-2.9802326e-08, 1.19209275e-07, -2.1175824e-22, 1)
-bones/0/scale = Vector3(1, 0.99999994, 0.99999994)
+bones/0/scale = Vector3(1, 1.1054434, 0.99999994)
 bones/1/name = "Bone"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, -2.019484e-28, -2.3841855e-07, 1.6940659e-21, 1, 7.1054274e-15, 2.3841855e-07, -7.1054274e-15, 1, 0, 0.20489258, 0)
 bones/1/enabled = true
 bones/1/position = Vector3(0, 0.20489258, 0)
-bones/1/rotation = Quaternion(-3.5527137e-15, -1.19209275e-07, 4.235165e-22, 1)
+bones/1/rotation = Quaternion(5.530282e-29, -1.19209275e-07, 3.8311922e-22, 1)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Bone.001.R"
 bones/2/parent = 0
 bones/2/rest = Transform3D(-0.894541, -0.4469846, 1.0289258e-06, 0.4469843, -0.8945416, -3.188452e-07, 1.0629352e-06, 1.7469368e-07, 1, -0.26750138, 0.53607166, -1.0827412e-07)
 bones/2/enabled = true
-bones/2/position = Vector3(-0.26750138, 0.53607166, -1.0827412e-07)
-bones/2/rotation = Quaternion(5.373236e-07, -3.702731e-08, 0.9732784, 0.22962834)
-bones/2/scale = Vector3(0.9999993, 0.99999994, 1)
+bones/2/position = Vector3(-0.26750135, 0.53607166, -1.08274115e-07)
+bones/2/rotation = Quaternion(0.001013323, 0.0056304033, 0.9737895, 0.22737935)
+bones/2/scale = Vector3(0.99999934, 1, 1)
 bones/3/name = "Bone.002.R"
 bones/3/parent = 0
 bones/3/rest = Transform3D(-0.999877, -0.015687017, 1.238326e-06, 0.015687015, -0.9998771, 4.005236e-07, 1.2318907e-06, 4.199e-07, 1, -0.19257231, 0.19350523, -4.438282e-08)
 bones/3/enabled = true
-bones/3/position = Vector3(-0.19257231, 0.19350523, -4.438282e-08)
-bones/3/rotation = Quaternion(6.1757316e-07, 2.051122e-07, 0.99996924, 0.007843749)
-bones/3/scale = Vector3(1, 1.0000001, 1)
+bones/3/position = Vector3(-0.19257231, 0.19350523, -4.438279e-08)
+bones/3/rotation = Quaternion(-0.0006338265, 0.0594809, 0.99820006, 0.0076378756)
+bones/3/scale = Vector3(0.99999994, 1.0000001, 1)
 bones/4/name = "Bone.001.L"
 bones/4/parent = 0
 bones/4/rest = Transform3D(-0.95331866, 0.30196324, -1.7253287e-06, -0.30196294, -0.9533196, -1.6387644e-07, -1.6942727e-06, 3.6475925e-07, 1, 0.26047677, 0.53747654, 1.7416891e-08)
 bones/4/enabled = true
-bones/4/position = Vector3(0.26047677, 0.53747654, 1.7416891e-08)
-bones/4/rotation = Quaternion(-8.6505565e-07, 5.081727e-08, 0.988261, -0.15277506)
-bones/4/scale = Vector3(0.99999905, 1, 1)
+bones/4/position = Vector3(0.26047677, 0.5374766, 1.7416925e-08)
+bones/4/rotation = Quaternion(0.004121489, 0.006428588, 0.98899853, -0.14772846)
+bones/4/scale = Vector3(0.9999989, 1, 1)
 bones/5/name = "Bone.002.L"
 bones/5/parent = 0
 bones/5/rest = Transform3D(-0.9985729, 0.05344214, -1.9163422e-06, -0.05344224, -0.998571, 3.3389202e-07, -1.8957634e-06, 4.358283e-07, 1, 0.19257231, 0.19350523, 4.7442807e-08)
 bones/5/enabled = true
-bones/5/position = Vector3(0.19257231, 0.19350523, 4.7442807e-08)
-bones/5/rotation = Quaternion(-9.533662e-07, 1.9249887e-07, 0.99964267, -0.026730623)
+bones/5/position = Vector3(0.19257231, 0.19350523, 4.7442832e-08)
+bones/5/rotation = Quaternion(0.0005498216, 0.033373646, 0.99909294, -0.026443532)
 bones/5/scale = Vector3(1.0000019, 1, 1)
 
 [node name="Bone" type="BoneAttachment3D" parent="Mesh/pivot/skeleton/Armature/Skeleton3D" unique_id=874242169]
-transform = Transform3D(1, -7.105428e-15, -1.4210855e-14, 7.1054274e-15, 0.99999994, 5.960465e-08, -1.4210855e-14, -5.960465e-08, 0.99999994, -1.4558491e-15, -0.5943017, -1.2212549e-08)
+transform = Transform3D(1, -7.8546475e-15, -1.4210855e-14, 7.1054265e-15, 1.1054434, 5.9604645e-08, -1.4210855e-14, -6.5889566e-08, 0.99999994, -1.6093588e-15, -0.57269716, -1.3500283e-08)
 bone_name = "Bone"
 bone_idx = 1
 
@@ -1209,7 +1203,7 @@ transform = Transform3D(0.35246283, -7.220642e-22, -3.639089e-36, 7.220642e-22, 
 mesh = SubResource("ArrayMesh_5hcfy")
 
 [node name="Bone_001_R" type="BoneAttachment3D" parent="Mesh/pivot/skeleton/Armature/Skeleton3D" unique_id=699290087]
-transform = Transform3D(-0.8945411, -0.4469846, 1.2673445e-06, 0.44698426, -0.8945416, -2.5924052e-07, 1.249568e-06, 3.345819e-07, 0.99999994, -0.26750138, -0.26312268, -7.644918e-08)
+transform = Transform3D(-0.89659464, -0.4428278, 0.0045342394, 0.48954594, -0.9910674, 0.011612561, -0.0005867633, 0.011426635, 0.9999345, -0.26750135, -0.20659745, -7.981835e-08)
 bone_name = "Bone.001.R"
 bone_idx = 2
 
@@ -1218,7 +1212,7 @@ transform = Transform3D(-0.15450722, 0.063028984, 2.0244666e-07, -0.06302902, -0
 mesh = SubResource("ArrayMesh_c3ob0")
 
 [node name="Bone_002_R" type="BoneAttachment3D" parent="Mesh/pivot/skeleton/Armature/Skeleton3D" unique_id=1380467907]
-transform = Transform3D(-0.999877, -0.015687017, 1.4767446e-06, 0.015687013, -0.99987704, 4.6012823e-07, 1.4693447e-06, 4.832374e-07, 0.99999994, -0.19257231, -0.60568905, -1.0003816e-08)
+transform = Transform3D(-0.9998825, -0.0153236305, -0.000356519, 0.01677273, -1.0974926, 0.1312796, -0.0021737488, 0.11873807, 0.9929232, -0.19257231, -0.5852852, -1.1219953e-08)
 bone_name = "Bone.002.R"
 bone_idx = 3
 
@@ -1227,7 +1221,7 @@ transform = Transform3D(-0.137066, 0.0016885101, 1.9451609e-07, -0.002150421, -0
 mesh = SubResource("ArrayMesh_slqkk")
 
 [node name="Bone_001_L" type="BoneAttachment3D" parent="Mesh/pivot/skeleton/Armature/Skeleton3D" unique_id=1012430095]
-transform = Transform3D(-0.95331866, 0.30196327, -1.4869102e-06, -0.30196294, -0.9533195, -1.0427175e-07, -1.4489854e-06, 3.4958794e-07, 0.99999994, 0.26047677, -0.2617178, -7.6721705e-08)
+transform = Transform3D(-0.9563176, 0.2922594, 0.00625316, -0.3229587, -1.0571023, 0.015402698, 0.010051898, 0.011497998, 0.9998833, 0.26047677, -0.20504433, -8.009967e-08)
 bone_name = "Bone.001.L"
 bone_idx = 4
 
@@ -1236,7 +1230,7 @@ transform = Transform3D(0.15479027, -0.06233081, -2.4978897e-07, -0.062330876, -
 mesh = SubResource("ArrayMesh_40ray")
 
 [node name="Bone_002_L" type="BoneAttachment3D" parent="Mesh/pivot/skeleton/Armature/Skeleton3D" unique_id=1184156243]
-transform = Transform3D(-0.9985728, 0.053442143, -1.6779238e-06, -0.05344224, -0.99857086, 3.9349666e-07, -1.6544997e-06, 4.8260614e-07, 0.99999994, 0.19257231, -0.60568905, -1.0003816e-08)
+transform = Transform3D(-0.9986026, 0.0528758, -0.0006661504, -0.058370158, -1.1014348, 0.07375062, 0.0028639263, 0.06665771, 0.99777174, 0.19257231, -0.5852852, -1.12199565e-08)
 bone_name = "Bone.002.L"
 bone_idx = 5
 
@@ -1354,6 +1348,29 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.10153901
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Death" unique_id=831007999]
 libraries/ = SubResource("AnimationLibrary_0qy4j")
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=94251119]
+
+[node name="Canvas" type="Control" parent="CanvasLayer2" unique_id=2143432935]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Shader" type="ColorRect" parent="CanvasLayer2/Canvas" unique_id=1996809335]
+material = SubResource("ShaderMaterial_wpkk7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="Area3D" type="Area3D" parent="." unique_id=1728056715]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1153635057]
@@ -1376,26 +1393,3 @@ stream = ExtResource("12_fkrvq")
 
 [node name="death_sfx" type="AudioStreamPlayer3D" parent="SFX" unique_id=132508103]
 stream = ExtResource("13_op12o")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=94251119]
-
-[node name="Canvas" type="Control" parent="CanvasLayer2" unique_id=2143432935]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Shader" type="ColorRect" parent="CanvasLayer2/Canvas" unique_id=1996809335]
-material = SubResource("ShaderMaterial_wpkk7")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[connection signal="body_entered" from="Mesh/Head" to="Mesh/Head" method="_on_body_entered"]
