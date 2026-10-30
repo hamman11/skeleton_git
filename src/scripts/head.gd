@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	if not is_thrown:
 		return
 
-	var steering := Input.get_action_strength("left") - Input.get_action_strength("right")
+	var steering := Input.get_action_strength("right") - Input.get_action_strength("left")
 	rotation.y += steering * turn_speed * delta
 
 	var forward := -global_transform.basis.z.normalized()
