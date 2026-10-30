@@ -1055,6 +1055,7 @@ radius = 0.54833984
 height = 1.6159668
 
 [node name="player" type="CharacterBody3D" unique_id=1979350120 node_paths=PackedStringArray("anim", "anim_death", "body", "mesh") groups=["player"]]
+transform = Transform3D(0.9999531, -0.008799255, -0.004043422, 0.008815784, 0.9999528, 0.0040892935, 0.004007255, -0.0041247415, 0.99998343, 0, 0, 0)
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_lsi8j")
