@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r1sj5yvpw7lk"
-path.s3tc="res://.godot/imported/sad_pumpkin_pallete.png-55519a162fcaefc9bd11325147061deb.s3tc.ctex"
+uid="uid://dxlnyjqoxs1bo"
+path.s3tc="res://.godot/imported/pumpkin_skeleton_skeleton.png-6abc6aef141e3b48fd9575332325ba6e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "3b95c541eb3019ebdac83a6fb9925caf"
+"md5": "26978468fdd59de8c63c8567524ab90c"
 }
 
 [deps]
 
-source_file="res://assets/models/sad_pumpkin_pallete.png"
-dest_files=["res://.godot/imported/sad_pumpkin_pallete.png-55519a162fcaefc9bd11325147061deb.s3tc.ctex"]
+source_file="res://assets/textures/pumpkin_skeleton_skeleton.png"
+dest_files=["res://.godot/imported/pumpkin_skeleton_skeleton.png-6abc6aef141e3b48fd9575332325ba6e.s3tc.ctex"]
 
 [params]
 
