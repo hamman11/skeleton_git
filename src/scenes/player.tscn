@@ -1054,22 +1054,17 @@ shader_parameter/vignette_radius = 0.9
 radius = 0.54833984
 height = 1.6159668
 
-[node name="player" type="CharacterBody3D" unique_id=1979350120 node_paths=PackedStringArray("anim", "anim_death", "body", "mesh", "head") groups=["player"]]
+[node name="player" type="CharacterBody3D" unique_id=1979350120 node_paths=PackedStringArray("anim", "anim_death", "body", "mesh") groups=["player"]]
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_lsi8j")
 body_speed = 7.0
 body_acceleration = 13.0
-head_speed = 15.0
-head_acceleration = 15.0
-head_drag = 0.94
-head_rotation_speed = 5.0
 death_screen = ExtResource("2_hhiii")
 anim = NodePath("Mesh/body/skeleton/AnimationPlayer")
 anim_death = NodePath("Death/AnimationPlayer")
 body = NodePath("Mesh/body")
 mesh = NodePath("Mesh")
-head = NodePath("Mesh/head")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=543424284]
 
