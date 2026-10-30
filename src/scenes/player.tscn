@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://bo8wwx5l331rq" path="res://assets/materials/skeleton.tres" id="6_3qshy"]
 [ext_resource type="Texture2D" uid="uid://sne1eqvn7xhj" path="res://assets/textures/skeleton_head_heart_shadow.png" id="7_5acq0"]
 [ext_resource type="Texture2D" uid="uid://btmuxf32xu0ya" path="res://assets/textures/skeleton_head_heart.png" id="8_5h06g"]
+[ext_resource type="Script" uid="uid://dw5pcso1a6smw" path="res://src/scenes/player_health.gd" id="9_hhiii"]
 [ext_resource type="AudioStream" uid="uid://bjh2ryk51q40d" path="res://assets/sfx/hitHurt.wav" id="9_twf7n"]
 [ext_resource type="AudioStream" uid="uid://d0ns03iyxls3o" path="res://assets/sfx/head_col.wav" id="10_qmjc7"]
 [ext_resource type="AudioStream" uid="uid://d4mambpd8uaw5" path="res://assets/sfx/throw.wav" id="11_ybrxc"]
@@ -1060,7 +1061,8 @@ axis_lock_linear_y = true
 script = ExtResource("1_lsi8j")
 body_speed = 7.0
 body_acceleration = 13.0
-head_speed = 13.0
+body_friction = 32.0
+head_speed = 10.0
 head_acceleration = 15.0
 head_rotation_speed = 4.0
 death_screen = ExtResource("2_hhiii")
@@ -1358,9 +1360,10 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Area3D" type="Area3D" parent="." unique_id=1728056715]
+[node name="DamageTaker" type="Area3D" parent="." unique_id=1728056715]
+script = ExtResource("9_hhiii")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1153635057]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageTaker" unique_id=1153635057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27160645, 0)
 shape = SubResource("CapsuleShape3D_g4v7s")
 

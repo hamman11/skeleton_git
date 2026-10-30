@@ -237,6 +237,10 @@ _data = {
 [node name="Test_Level" type="Node3D" unique_id=2098342019]
 
 [node name="player" parent="." unique_id=1979350120 instance=ExtResource("1_gojnm")]
+head_boost_speed = 21.0
+head_boost_duration = 0.2
+head_acceleration = 21.0
+head_drag = 0.94
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1639914837]
 transform = Transform3D(9.004156, 0, 0, 0, 1, 0, 0, 0, 9.004156, 0, -0.48349524, 0)
