@@ -6,6 +6,7 @@ extends Area3D
 
 @onready var hearts_container: HBoxContainer = $"../CanvasLayer/HBoxContainer"
 @onready var i_timer: Timer = $"../InvincibiltyTimer"
+const PARTICLE_SCENE = preload("res://src/scenes/hitparticles.tscn")
 
 var current_health := 3
 var hearts_list: Array[TextureRect] = []
@@ -41,6 +42,11 @@ func take_damage(source: Node3D = null) -> void:
 			player.apply_knockback(source, source.get_knockback_force())
 
 		start_invincibility()
+	var instance = PARTICLE_SCENE.instantiate()
+	
+	get_tree().current_scene.add_child(instance)
+	
+	instance.global_position = global_position
 
 func update_heart_display() -> void:
 	for i in range(hearts_list.size()):

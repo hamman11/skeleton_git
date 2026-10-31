@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dwrabe11i5b8s"]
 
+[ext_resource type="Script" uid="uid://rohweehnss5" path="res://src/scripts/hit_particles.gd" id="1_lvdx1"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6j6"]
 shading_mode = 0
 albedo_color = Color(0.827451, 0.8235294, 0.8352941, 1)
@@ -37,3 +39,4 @@ explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ya6j6")
 draw_pass_1 = SubResource("SphereMesh_g4v7s")
+script = ExtResource("1_lvdx1")

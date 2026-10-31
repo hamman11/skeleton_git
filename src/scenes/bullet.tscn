@@ -107,7 +107,7 @@ anim = NodePath("bullet2/AnimationPlayer")
 transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, 0, 0, 0)
 
 [node name="bullet" type="MeshInstance3D" parent="bullet2" unique_id=750105113]
-transform = Transform3D(0.99048734, -0.1376037, 0, 0.1376037, 0.99048734, 0, 0, 0, 1, 0.15337867, 0.05361642, 0)
+transform = Transform3D(0.97307724, 0.23047923, 0, -0.23047923, 0.97307724, 0, 0, 0, 1, -0.17950341, 0.05712431, 0)
 mesh = SubResource("ArrayMesh_jvf6v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="bullet2" unique_id=1871333382]
@@ -116,3 +116,5 @@ libraries/ = SubResource("AnimationLibrary_n1dow")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2134381455]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.011104584, 0.0017700194, 0.011001587)
 shape = SubResource("CapsuleShape3D_225pw")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
