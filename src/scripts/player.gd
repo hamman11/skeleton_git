@@ -31,6 +31,7 @@ var has_moved := false
 var move_direction := Vector3.FORWARD
 var movement_mode := MovementMode.BODY
 var head_boost_timer := 0.0
+var is_head_mode := false
 
 
 func _ready() -> void:
@@ -40,6 +41,7 @@ func _ready() -> void:
 	head.visible = true
 	death_anim.visible = false
 	shadow.visible = false
+	is_head_mode = false
 
 	update_movement_mode()
 
@@ -73,6 +75,13 @@ func _physics_process(delta: float) -> void:
 		process_head_movement(input_dir, delta)
 
 	velocity.y = 0.0
+	if is_head_mode:
+		if is_on_wall():
+			for i in range(get_slide_collision_count()):
+				var collision := get_slide_collision(i)
+				var wall_normal := collision.get_normal()
+			
+				velocity = velocity.bounce(wall_normal) * 1.0
 	move_and_slide()
 
 	var horizontal := Vector2(velocity.x, velocity.z)
@@ -82,6 +91,7 @@ func _physics_process(delta: float) -> void:
 		horizontal = horizontal.normalized() * max_speed
 		velocity.x = horizontal.x
 		velocity.z = horizontal.y
+		
 
 
 func process_body_movement(input_dir: Vector3, delta: float) -> void:
@@ -154,17 +164,16 @@ func update_movement_mode() -> void:
 	head.visible = true
 	
 	if is_head:
+		is_head_mode = true
 		shadow.visible = true
 	else:
+		is_head_mode = false
 		shadow.visible = false
 
 
 func _on_player_first_move() -> void:
 	if camera and camera.has_method("zoom_out_anim"):
 		camera.zoom_out_anim()
-
-
-
 
 func death() -> void:
 	if not is_alive:

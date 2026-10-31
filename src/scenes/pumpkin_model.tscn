@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://cbox71mb0f6ny"]
-
-[ext_resource type="PackedScene" uid="uid://jgo8bhj0jv7g" path="res://assets/models/pumpkin.glb" id="1_dkvrh"]
-
-[node name="pumpkin" unique_id=715451434 instance=ExtResource("1_dkvrh")]
-
-[node name="Pumpkin" parent="." index="0" unique_id=507800667]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0780516e-08, 0, 0)

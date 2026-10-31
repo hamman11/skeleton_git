@@ -240,11 +240,14 @@ fog_depth_curve = 0.42044842
 [node name="Test_Level" type="Node3D" unique_id=2098342019]
 
 [node name="player" parent="." unique_id=1979350120 instance=ExtResource("1_gojnm")]
+wall_min_slide_angle = 0.017453292
+floor_stop_on_slope = false
+floor_block_on_wall = false
 rotation_speed = 28.0
 head_boost_speed = 21.0
 head_boost_duration = 0.2
 head_acceleration = 21.0
-head_drag = 0.94
+head_drag = 0.98
 head_rotation_speed = 12.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1639914837]
