@@ -47,13 +47,10 @@ func _on_area_entered(area: Area3D) -> void:
 
 
 func _on_invincibilty_timer_timeout() -> void:
-	print('stopped invic')
 	is_invincible = false
 	
 	var overlarpping_areas = get_overlapping_areas()
-	print(overlarpping_areas.size)
 	for area in overlarpping_areas:
 		if area.is_in_group("enemy"):
-			print("enemy is rapping me")
 			take_damage()
 			break

@@ -33,7 +33,7 @@ var move_direction := Vector3.FORWARD
 var movement_mode := MovementMode.BODY
 var head_boost_timer := 0.0
 var is_head_mode := false
-
+var is_shooting := false
 
 func _ready() -> void:
 	camera = get_viewport().get_camera_3d()
@@ -48,6 +48,12 @@ func _ready() -> void:
 	book_anim.play_backwards("BookHide")
 	await book_anim.animation_finished
 	book_anim.play("BookFloat")
+	
+func _process(_delta: float) -> void:
+	if Input.is_action_pressed("shoot"):
+		is_shooting = true
+	else:
+		is_shooting = false
 
 
 func _physics_process(delta: float) -> void:
@@ -182,6 +188,7 @@ func update_movement_mode() -> void:
 func _on_player_first_move() -> void:
 	if camera and camera.has_method("zoom_out_anim"):
 		camera.zoom_out_anim()
+
 
 func death() -> void:
 	if not is_alive:
