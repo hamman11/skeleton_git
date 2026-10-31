@@ -1,3 +1,4 @@
+
 class_name Player
 extends CharacterBody3D
 
@@ -15,6 +16,10 @@ enum MovementMode { BODY, HEAD }
 @export var head_drag := 0.985
 @export var head_rotation_speed := 1.5
 
+@export var knockback_duration := 0.2
+@export var flash_interval := 0.08
+@export var flash: Node3D
+
 @export var death_screen: PackedScene
 @export var anim: AnimationPlayer
 @export var anim_death: AnimationPlayer
@@ -25,15 +30,24 @@ enum MovementMode { BODY, HEAD }
 @export var shadow: MeshInstance3D
 
 @onready var death_anim: Node3D = $Death
+@onready var shoot_timer: Timer = $ShootTimer
 
 var camera: Camera3D
 var is_alive := true
 var has_moved := false
-var move_direction := Vector3.FORWARD
-var movement_mode := MovementMode.BODY
-var head_boost_timer := 0.0
 var is_head_mode := false
 var is_shooting := false
+var movement_mode := MovementMode.BODY
+var move_direction := Vector3.FORWARD
+var head_boost_timer := 0.0
+
+var knockback_velocity := Vector3.ZERO
+var knockback_timer := 0.0
+
+var is_flashing := false
+var flash_timer := 0.0
+var flash_visible := true
+
 
 func _ready() -> void:
 	camera = get_viewport().get_camera_3d()
@@ -42,35 +56,43 @@ func _ready() -> void:
 	head.visible = true
 	death_anim.visible = false
 	shadow.visible = false
-	is_head_mode = false
+	flash.visible = true
 
 	update_movement_mode()
 	book_anim.play_backwards("BookHide")
 	await book_anim.animation_finished
 	book_anim.play("BookFloat")
-	
-func _process(_delta: float) -> void:
-	if Input.is_action_pressed("shoot"):
-		is_shooting = true
-	else:
-		is_shooting = false
+
+
+func _process(delta: float) -> void:
+	is_shooting = Input.is_action_pressed("shoot") and not is_head_mode
+
+	if is_flashing:
+		flash_timer -= delta
+		if flash_timer <= 0.0:
+			flash_timer = flash_interval
+			flash_visible = not flash_visible
+			flash.visible = flash_visible
 
 
 func _physics_process(delta: float) -> void:
 	if not is_alive:
 		return
 
-	if Input.is_action_just_pressed("throw"):
+	if Input.is_action_just_pressed("throw") and knockback_timer <= 0.0:
 		switch_movement_mode()
 
-	if head_boost_timer > 0.0:
-		head_boost_timer = maxf(head_boost_timer - delta, 0.0)
+	head_boost_timer = maxf(head_boost_timer - delta, 0.0)
 
-	var input_dir := Vector3(
-		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		0.0,
-		Input.get_action_strength("down") - Input.get_action_strength("up")
-	).normalized()
+	if knockback_timer > 0.0:
+		knockback_timer = maxf(knockback_timer - delta, 0.0)
+		velocity = Vector3(knockback_velocity.x, 0.0, knockback_velocity.z)
+		move_and_slide()
+		return
+
+	knockback_velocity = Vector3.ZERO
+
+	var input_dir := Vector3(Input.get_action_strength("right") - Input.get_action_strength("left"),0.0,Input.get_action_strength("down") - Input.get_action_strength("up")).normalized()
 
 	if input_dir.length_squared() > 0.0:
 		if not has_moved:
@@ -85,23 +107,12 @@ func _physics_process(delta: float) -> void:
 		process_head_movement(input_dir, delta)
 
 	velocity.y = 0.0
-	if is_head_mode:
-		if is_on_wall():
-			for i in range(get_slide_collision_count()):
-				var collision := get_slide_collision(i)
-				var wall_normal := collision.get_normal()
-			
-				velocity = velocity.bounce(wall_normal) * 1.0
+
+	if is_head_mode and is_on_wall():
+		for i in range(get_slide_collision_count()):
+			velocity = velocity.bounce(get_slide_collision(i).get_normal()) * 0.67
+
 	move_and_slide()
-
-	var horizontal := Vector2(velocity.x, velocity.z)
-	var max_speed := body_speed if movement_mode == MovementMode.BODY else get_head_speed()
-
-	if horizontal.length() > max_speed:
-		horizontal = horizontal.normalized() * max_speed
-		velocity.x = horizontal.x
-		velocity.z = horizontal.y
-		
 
 
 func process_body_movement(input_dir: Vector3, delta: float) -> void:
@@ -110,11 +121,17 @@ func process_body_movement(input_dir: Vector3, delta: float) -> void:
 
 	if input_dir.length_squared() > 0.0:
 		horizontal = horizontal.move_toward(target, body_acceleration * delta)
-		rotate_mesh(input_dir, delta, rotation_speed)
 		anim.play("Idle_001")
 	else:
 		horizontal = horizontal.move_toward(Vector2.ZERO, body_friction * delta)
 		anim.play("Idle")
+
+	if is_shooting:
+		var mouse_dir := get_mouse_direction()
+		if mouse_dir.length_squared() > 0.0:
+			rotate_mesh(mouse_dir, delta, rotation_speed)
+	elif input_dir.length_squared() > 0.0:
+		rotate_mesh(input_dir, delta, rotation_speed)
 
 	velocity.x = horizontal.x
 	velocity.z = horizontal.y
@@ -135,21 +152,33 @@ func process_head_movement(input_dir: Vector3, delta: float) -> void:
 	velocity.z = horizontal.y
 
 
+func get_mouse_direction() -> Vector3:
+	if camera == null:
+		return Vector3.ZERO
+
+	var mouse_pos := get_viewport().get_mouse_position()
+	var ray_origin := camera.project_ray_origin(mouse_pos)
+	var ray_direction := camera.project_ray_normal(mouse_pos)
+	var hit = Plane(Vector3.UP, global_position.y).intersects_ray(ray_origin, ray_direction)
+
+	if hit == null:
+		return Vector3.ZERO
+
+	var direction: Vector3 = hit - global_position
+	direction.y = 0.0
+	return direction.normalized()
+
+
 func get_head_speed() -> float:
 	if head_boost_timer > 0.0:
-		var boost_amount := head_boost_timer / head_boost_duration
-		return lerp(head_speed, head_boost_speed, boost_amount)
+		return lerp(head_speed, head_boost_speed, head_boost_timer / head_boost_duration)
 
 	return head_speed
 
 
-func rotate_mesh(direction: Vector3, delta: float, rot_speed: float) -> void:
+func rotate_mesh(direction: Vector3, delta: float, speed: float) -> void:
 	var target_angle := atan2(-direction.x, -direction.z)
-
-	if movement_mode == MovementMode.HEAD:
-		rotation_speed = head_rotation_speed
-
-	mesh.rotation.y = rotate_toward(mesh.rotation.y, target_angle, rot_speed * delta)
+	mesh.rotation.y = rotate_toward(mesh.rotation.y, target_angle, speed * delta)
 
 
 func switch_movement_mode() -> void:
@@ -168,21 +197,39 @@ func switch_movement_mode() -> void:
 
 
 func update_movement_mode() -> void:
-	var is_head := movement_mode == MovementMode.HEAD
-
-	body.visible = not is_head
+	is_head_mode = movement_mode == MovementMode.HEAD
+	body.visible = not is_head_mode
 	head.visible = true
-	
-	if is_head:
-		is_head_mode = true
-		shadow.visible = true
+	shadow.visible = is_head_mode
+
+	if is_head_mode:
 		book_anim.play("BookHide")
 	else:
-		is_head_mode = false
-		shadow.visible = false
 		book_anim.play_backwards("BookHide")
 		await book_anim.animation_finished
 		book_anim.play("BookFloat")
+		
+
+
+
+func apply_knockback(source: Node3D, force: float) -> void:
+	var direction := global_position - source.global_position
+	direction.y = 0.0
+
+	if direction.length_squared() < 0.001:
+		direction = -global_transform.basis.z
+
+	knockback_velocity = direction.normalized() * force
+	knockback_timer = knockback_duration
+	velocity.x = knockback_velocity.x
+	velocity.z = knockback_velocity.z
+
+
+func set_invincibility_flash(active: bool) -> void:
+	is_flashing = active
+	flash_timer = 0.0
+	flash_visible = true
+	flash.visible = true
 
 
 func _on_player_first_move() -> void:
@@ -195,15 +242,15 @@ func death() -> void:
 		return
 
 	is_alive = false
-
 	velocity = Vector3.ZERO
+	knockback_velocity = Vector3.ZERO
+	set_invincibility_flash(false)
 
 	body.visible = false
 	head.visible = false
 	death_anim.visible = true
 
 	if death_screen != null:
-		var screen = death_screen.instantiate()
-		get_tree().current_scene.add_child(screen)
+		get_tree().current_scene.add_child(death_screen.instantiate())
 
 	anim_death.play("deathanim")

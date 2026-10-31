@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cto83frhh78ki"]
+
+[ext_resource type="Script" uid="uid://by6tn77cdoo7u" path="res://src/scripts/bullet.gd" id="1_7jxxo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(0.4107132, 0.41149902, 0.41809082)
+
+[sub_resource type="PrismMesh" id="PrismMesh_g4v7s"]
+
+[node name="Bullet" type="Area3D" unique_id=1066031854]
+script = ExtResource("1_7jxxo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2134381455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011104584, 0.0017700195, 0.010192871)
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1095633961]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("PrismMesh_g4v7s")

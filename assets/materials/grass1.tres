@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b0kttrxxaiykw"]
+
+[ext_resource type="Shader" uid="uid://b1nfetymwctl8" path="res://src/shaders/grass.gdshader" id="1_3ex6d"]
+[ext_resource type="Texture2D" uid="uid://d3wp6vbvdkqu1" path="res://assets/models/grass_grass1.png" id="2_hn8fx"]
+
+[sub_resource type="Gradient" id="Gradient_0q3w5"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gbhdq"]
+gradient = SubResource("Gradient_0q3w5")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3ex6d")
+shader_parameter/grass_texture = ExtResource("2_hn8fx")
+shader_parameter/gradient_texture = SubResource("GradientTexture1D_gbhdq")
+shader_parameter/gradient_blend = 0.5
