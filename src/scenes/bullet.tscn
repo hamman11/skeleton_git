@@ -1,19 +1,118 @@
-[gd_scene format=3 uid="uid://cto83frhh78ki"]
+[gd_scene format=4 uid="uid://cto83frhh78ki"]
 
 [ext_resource type="Script" uid="uid://by6tn77cdoo7u" path="res://src/scripts/bullet.gd" id="1_7jxxo"]
+[ext_resource type="Material" uid="uid://c87acxac5d337" path="res://assets/materials/palletemat.tres" id="2_a4mbi"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
-size = Vector3(0.4107132, 0.41149902, 0.41809082)
+[sub_resource type="ArrayMesh" id="ArrayMesh_eb3gj"]
+_surfaces = [{
+"aabb": AABB(-0.41300163, -0.26965308, -0.53080213, 0.82600325, 0.53930616, 1.0616043),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AAAHAAQABwABAAQABAAIAAAABAABAAkABAAJAAgAAQACAAkACAAJAAMACQACAAMAAAAIAAYACAADAAYAAAAKAAcAAAAGAAoABwALAAEACwACAAEACgALAAcAAwACAAUABgADAAUABQACAAsABgAFAAoACgAFAAsA"),
+"lods": [0.6331342, PackedByteArray("BAACAAAABAABAAIAAAABAAQAAAACAAEAAAACAAMAAwACAAUAAAAFAAIABgADAAUAAAADAAYABgAFAAAA"), 0.9497012, PackedByteArray("AAABAAIAAAACAAEAAAACAAMAAAADAAIA")],
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("/38AAP9/AACMpz25//8AAP9/////fwAAjKc9uQAAAACM58FGGs8AAHIYPbnkMAAAcljBRgAAAAByWMFG//8AAIznwUbkMAAA//89uf9/AAAAAMFG/38AAHIYPbkazwAA")
+}]
+blend_shape_mode = 0
 
-[sub_resource type="PrismMesh" id="PrismMesh_g4v7s"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_jvf6v"]
+resource_name = "bullet_bullet"
+_surfaces = [{
+"aabb": AABB(-0.41300163, -0.26965308, -0.53080213, 0.82600325, 0.53930616, 1.0616043),
+"attribute_data": PackedByteArray("dO1/z3TtNcoI8pHH7uuRx4/zf8+P8zXKqfl/zxX1kcf77trMFfXazJz2Ncoi+JHH7uvazGfqNcqB8DXK++6Rxwjy2syB8H/PIvjazJz2f8+p+TXKMPvazA=="),
+"format": 34896613399,
+"index_count": 60,
+"index_data": PackedByteArray("AAAMAAgADAABAAgADAANAAEADQADAAEACAABAA4AAQAPAA4ACAAOABAACAAQABEAEAAOAAUADgACAAUAEAAFAAkABAAQAAkACQAFAAoABQAHAAoACQAKABIAEwAJABIAEgAKABQACgALABQAEgAUABUABgASABUA"),
+"lods": [0.6331342, PackedByteArray("CAACAAQACAABAAIAAAABAAgAAAADAAEABAACAAUABAAFAAkACQAFAAoABQAHAAoACQAKAAYABgAKAAsA"), 0.9497012, PackedByteArray("AAABAAIAAAADAAEABAACAAUABgAFAAcA")],
+"material": ExtResource("2_a4mbi"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 22,
+"vertex_data": PackedByteArray("/38AAP9/tMGMpz25//+PmP9/////f8fh/3////9/tMH/fwAA/38U9IynPbkAAGry/38AAP9/4Mr/f////38U9IznwUYaz1itcljBRgAAavJyGD255DB32P9/////f0zVcljBRv//+JhyGD25Gs9PrP//Pbn/f3HC/3////9/4MqM58FG5DB32P9/AAD/f0zVAADBRv9/ccL/fwAA/3/H4XIYPbkaz1GvcljBRv//YJ/YJQJtx88ER8HOeh0m2vyS4HMMRpScIwPNIq7FHozyuRdcJzVqY9v8posU3KSqtKpAOD6n67SrzfWqexUx3VA6WHTqI1pVSlUJVYPqPTGE4k+bE8koKuDX")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_eb3gj")
 
-[node name="Bullet" type="Area3D" unique_id=1066031854]
+[sub_resource type="Animation" id="Animation_734i8"]
+resource_name = "Idle"
+length = 0.41666666
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("bullet")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.033333335, 1, 0, 0, 0, 0.06666667, 1, -0.046479322, 0.013098721, 0, 0.1, 1, -0.11859269, 0.035634153, 0, 0.13333334, 1, -0.18366373, 0.058592126, 0, 0.16666667, 1, -0.19718498, 0.0676063, 0, 0.2, 1, -0.14788873, 0.040563777, 0, 0.23333333, 1, -0.054225862, 0.013521258, 0, 0.26666668, 1, 0.05535271, 0.01746498, 0, 0.3, 1, 0.15464942, 0.054085065, 0, 0.33333334, 1, 0.21972042, 0.0957756, 0, 0.36666667, 1, 0.22873458, 0.100282684, 0, 0.4, 1, 0.11267709, 0.04732439, -9.0835073e-10, 0.41666666, 1, 0.033803143, 0.011267717, -1.5139172e-09)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("bullet")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.033333335, 1, 0, 0, 0, 1, 0.06666667, 1, 0, 0, -0.03206962, 0.9994857, 0.1, 1, 0, 0, -0.07896371, 0.99687755, 0.13333334, 1, 0, 0, -0.11854912, 0.99294823, 0.16666667, 1, 0, 0, -0.12411312, 0.9922681, 0.2, 1, 0, 0, -0.09041757, 0.99590397, 0.23333333, 1, 0, 0, -0.032821316, 0.9994613, 0.26666668, 1, 0, 0, 0.025619106, 0.9996718, 0.3, 1, 0, 0, 0.0695273, 0.99758005, 0.33333334, 1, 0, 0, 0.091569856, 0.99579865, 0.36666667, 1, 0, 0, 0.093317546, 0.99563646, 0.4, 1, 4.7498913e-16, -1.2276948e-09, 0.0466717, 0.9989103, 0.41666666, 1, 7.9112554e-16, -2.0448063e-09, 0.015218995, 0.9998842)
+tracks/2/type = "scale_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("bullet")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_g05jm"]
+resource_name = "Start"
+length = 0.20833333
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("bullet")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("bullet")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.033333335, 1, 0, 0, 0, 1, 0.06666667, 1, 0.08773168, 0, 0, 0.9961442, 0.1, 1, 0.10575593, 0, 0, 0.9943921, 0.13333334, 1, 0.03621099, 0, 0, 0.99934417, 0.16666667, 1, 0, 0, 0, 1, 0.20833333, 1, 0, 0, 0, 1)
+tracks/2/type = "scale_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("bullet")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.033333335, 1, 0, 0, 0, 0.06666667, 1, 0.16001305, 0.17174509, 0.28722176, 0.13333334, 1, 0.8153046, 0.82605886, 0.95736784, 0.16666667, 1, 1.0286552, 1.0286552, 1.0678173, 0.20833333, 1, 1, 1, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1dow"]
+_data = {
+&"Idle": SubResource("Animation_734i8"),
+&"Start": SubResource("Animation_g05jm")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_225pw"]
+radius = 0.07714844
+height = 0.32278442
+
+[node name="Bullet" type="Area3D" unique_id=1066031854 node_paths=PackedStringArray("anim")]
 script = ExtResource("1_7jxxo")
+lifetime = 1.0
+anim = NodePath("bullet2/AnimationPlayer")
+
+[node name="bullet2" type="Node3D" parent="." unique_id=506510826]
+transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, 0, 0, 0)
+
+[node name="bullet" type="MeshInstance3D" parent="bullet2" unique_id=750105113]
+transform = Transform3D(0.99048734, -0.1376037, 0, 0.1376037, 0.99048734, 0, 0, 0, 1, 0.15337867, 0.05361642, 0)
+mesh = SubResource("ArrayMesh_jvf6v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bullet2" unique_id=1871333382]
+libraries/ = SubResource("AnimationLibrary_n1dow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2134381455]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011104584, 0.0017700195, 0.010192871)
-shape = SubResource("BoxShape3D_g4v7s")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1095633961]
-transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
-mesh = SubResource("PrismMesh_g4v7s")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.011104584, 0.0017700194, 0.011001587)
+shape = SubResource("CapsuleShape3D_225pw")

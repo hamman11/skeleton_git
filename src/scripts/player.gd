@@ -34,6 +34,7 @@ enum MovementMode { BODY, HEAD }
 @export var body: Node3D
 @export var head: Node3D
 @export var mesh: Node3D
+@export var book: Node3D
 @export var shadow: MeshInstance3D
 
 @onready var death_anim: Node3D = $Death
@@ -69,6 +70,7 @@ func _ready() -> void:
 	death_anim.visible = false
 	shadow.visible = false
 	flash.visible = true
+	book.visible = true
 
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
@@ -76,7 +78,12 @@ func _ready() -> void:
 	book_anim.play_backwards("BookHide")
 	await book_anim.animation_finished
 	book_anim.play("BookFloat")
-
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_released("shoot") and not is_head_mode:
+		book_anim.play("BookFloat")
+	if event.is_action_pressed("shoot") and not is_head_mode:
+		book_anim.play("BookShoot")
 
 func _process(delta: float) -> void:
 	is_shooting = Input.is_action_pressed("shoot") and not is_head_mode
@@ -274,7 +281,10 @@ func update_movement_mode() -> void:
 
 	if is_head_mode:
 		book_anim.play("BookHide")
+		await book_anim.animation_finished
+		book.visible = false
 	else:
+		book.visible = true
 		book_anim.play_backwards("BookHide")
 		await book_anim.animation_finished
 		book_anim.play("BookFloat")
