@@ -1,4 +1,3 @@
-
 class_name Player
 extends CharacterBody3D
 
@@ -20,6 +19,14 @@ enum MovementMode { BODY, HEAD }
 @export var flash_interval := 0.08
 @export var flash: Node3D
 
+@export var projectile_scene: PackedScene
+@export var shoot_point: Marker3D
+@export var shoot_cooldown := 0.4
+@export var shoot_delay := 0.08
+@export var projectile_speed := 15.0
+
+@export var switch_cooldown := 0.35
+
 @export var death_screen: PackedScene
 @export var anim: AnimationPlayer
 @export var anim_death: AnimationPlayer
@@ -37,9 +44,14 @@ var is_alive := true
 var has_moved := false
 var is_head_mode := false
 var is_shooting := false
+var can_shoot := true
+var can_switch := true
 var movement_mode := MovementMode.BODY
 var move_direction := Vector3.FORWARD
 var head_boost_timer := 0.0
+var shoot_delay_timer := 0.0
+var pending_shot := false
+var switch_timer := 0.0
 
 var knockback_velocity := Vector3.ZERO
 var knockback_timer := 0.0
@@ -58,6 +70,8 @@ func _ready() -> void:
 	shadow.visible = false
 	flash.visible = true
 
+	shoot_timer.timeout.connect(_on_shoot_timer_timeout)
+
 	update_movement_mode()
 	book_anim.play_backwards("BookHide")
 	await book_anim.animation_finished
@@ -66,6 +80,24 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	is_shooting = Input.is_action_pressed("shoot") and not is_head_mode
+
+	if switch_timer > 0.0:
+		switch_timer = maxf(switch_timer - delta, 0.0)
+		can_switch = switch_timer <= 0.0
+
+	if is_shooting and can_shoot and not pending_shot:
+		pending_shot = true
+		shoot_delay_timer = shoot_delay
+
+	if pending_shot:
+		shoot_delay_timer -= delta
+
+		if shoot_delay_timer <= 0.0:
+			pending_shot = false
+			shoot()
+
+	if not is_shooting:
+		pending_shot = false
 
 	if is_flashing:
 		flash_timer -= delta
@@ -79,7 +111,7 @@ func _physics_process(delta: float) -> void:
 	if not is_alive:
 		return
 
-	if Input.is_action_just_pressed("throw") and knockback_timer <= 0.0:
+	if Input.is_action_just_pressed("throw") and can_switch and knockback_timer <= 0.0:
 		switch_movement_mode()
 
 	head_boost_timer = maxf(head_boost_timer - delta, 0.0)
@@ -92,7 +124,11 @@ func _physics_process(delta: float) -> void:
 
 	knockback_velocity = Vector3.ZERO
 
-	var input_dir := Vector3(Input.get_action_strength("right") - Input.get_action_strength("left"),0.0,Input.get_action_strength("down") - Input.get_action_strength("up")).normalized()
+	var input_dir := Vector3(
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		0.0,
+		Input.get_action_strength("down") - Input.get_action_strength("up")
+	).normalized()
 
 	if input_dir.length_squared() > 0.0:
 		if not has_moved:
@@ -181,7 +217,40 @@ func rotate_mesh(direction: Vector3, delta: float, speed: float) -> void:
 	mesh.rotation.y = rotate_toward(mesh.rotation.y, target_angle, speed * delta)
 
 
+func shoot() -> void:
+	if not can_shoot or is_head_mode or not is_alive:
+		return
+
+	if projectile_scene == null or shoot_point == null:
+		return
+
+	var direction := get_mouse_direction()
+	if direction.length_squared() == 0.0:
+		return
+
+	can_shoot = false
+
+	var projectile = projectile_scene.instantiate()
+	get_tree().current_scene.add_child(projectile)
+
+	projectile.global_position = shoot_point.global_position
+	projectile.direction = direction
+	projectile.speed = projectile_speed
+
+	shoot_timer.start(shoot_cooldown)
+
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true
+
+
 func switch_movement_mode() -> void:
+	if not can_switch:
+		return
+
+	can_switch = false
+	switch_timer = switch_cooldown
+
 	if movement_mode == MovementMode.BODY:
 		movement_mode = MovementMode.HEAD
 		head_boost_timer = head_boost_duration
@@ -198,6 +267,7 @@ func switch_movement_mode() -> void:
 
 func update_movement_mode() -> void:
 	is_head_mode = movement_mode == MovementMode.HEAD
+	pending_shot = false
 	body.visible = not is_head_mode
 	head.visible = true
 	shadow.visible = is_head_mode
@@ -208,8 +278,6 @@ func update_movement_mode() -> void:
 		book_anim.play_backwards("BookHide")
 		await book_anim.animation_finished
 		book_anim.play("BookFloat")
-		
-
 
 
 func apply_knockback(source: Node3D, force: float) -> void:
@@ -244,6 +312,7 @@ func death() -> void:
 	is_alive = false
 	velocity = Vector3.ZERO
 	knockback_velocity = Vector3.ZERO
+	pending_shot = false
 	set_invincibility_flash(false)
 
 	body.visible = false
