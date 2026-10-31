@@ -18,6 +18,7 @@ enum MovementMode { BODY, HEAD }
 @export var death_screen: PackedScene
 @export var anim: AnimationPlayer
 @export var anim_death: AnimationPlayer
+@export var book_anim: AnimationPlayer
 @export var body: Node3D
 @export var head: Node3D
 @export var mesh: Node3D
@@ -44,6 +45,9 @@ func _ready() -> void:
 	is_head_mode = false
 
 	update_movement_mode()
+	book_anim.play_backwards("BookHide")
+	await book_anim.animation_finished
+	book_anim.play("BookFloat")
 
 
 func _physics_process(delta: float) -> void:
@@ -166,9 +170,13 @@ func update_movement_mode() -> void:
 	if is_head:
 		is_head_mode = true
 		shadow.visible = true
+		book_anim.play("BookHide")
 	else:
 		is_head_mode = false
 		shadow.visible = false
+		book_anim.play_backwards("BookHide")
+		await book_anim.animation_finished
+		book_anim.play("BookFloat")
 
 
 func _on_player_first_move() -> void:
