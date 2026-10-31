@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bdopad0717ls1" path="res://src/scripts/camera.gd" id="2_1c2mv"]
 [ext_resource type="Script" uid="uid://2y7assi6xh0u" path="res://src/scripts/sad_pumpkin.gd" id="3_f7g2b"]
 [ext_resource type="Material" uid="uid://c87acxac5d337" path="res://assets/materials/palletemat.tres" id="4_4ptq8"]
+[ext_resource type="Script" uid="uid://ctrlm1dumm38c" path="res://enemy_area.gd" id="5_sb12i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhiii"]
 shading_mode = 0
@@ -303,7 +304,8 @@ wait_time = 0.4
 wait_time = 5.0
 autostart = true
 
-[node name="Area3D" type="Area3D" parent="sad_pumpkin" unique_id=1274332590 groups=["pumpkin"]]
+[node name="Area3D" type="Area3D" parent="sad_pumpkin" unique_id=1274332590 groups=["enemy"]]
+script = ExtResource("5_sb12i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="sad_pumpkin/Area3D" unique_id=997055211]
 transform = Transform3D(-0.060000002, 0, 9.059748e-09, 0, 0.060000002, 0, -9.059748e-09, 0, -0.060000002, 0, 0.87179744, 0)

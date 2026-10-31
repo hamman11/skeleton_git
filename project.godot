@@ -30,7 +30,7 @@ enabled=PackedStringArray("res://addons/GPUTrail-main/plugin.cfg", "res://addons
 
 head=""
 player=""
-pumpkin=""
+enemy=""
 
 [input]
 
