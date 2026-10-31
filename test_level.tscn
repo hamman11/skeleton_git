@@ -5,6 +5,10 @@
 [ext_resource type="Script" uid="uid://2y7assi6xh0u" path="res://src/scripts/sad_pumpkin.gd" id="3_f7g2b"]
 [ext_resource type="Material" uid="uid://c87acxac5d337" path="res://assets/materials/palletemat.tres" id="4_4ptq8"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhiii"]
+shading_mode = 0
+albedo_color = Color(0.31764707, 0.3019608, 0.2901961, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
 
 [sub_resource type="Animation" id="Animation_k37mw"]
@@ -225,16 +229,27 @@ _data = {
 &"Roll": SubResource("Animation_2a4ar")
 }
 
+[sub_resource type="Environment" id="Environment_g4v7s"]
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.1764706, 0.15294118, 0.1882353, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_depth_curve = 0.42044842
+
 [node name="Test_Level" type="Node3D" unique_id=2098342019]
 
 [node name="player" parent="." unique_id=1979350120 instance=ExtResource("1_gojnm")]
+rotation_speed = 28.0
 head_boost_speed = 21.0
 head_boost_duration = 0.2
 head_acceleration = 21.0
 head_drag = 0.94
+head_rotation_speed = 12.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1639914837]
-transform = Transform3D(9.004156, 0, 0, 0, 1, 0, 0, 0, 9.004156, 0, -0.48349524, 0)
+transform = Transform3D(36.71129, 0, 0, 0, 1, 0, 0, 0, 36.71129, 0, -0.48349524, 0)
+material_override = SubResource("StandardMaterial3D_hhiii")
 mesh = SubResource("PlaneMesh_g4v7s")
 
 [node name="CameraHolder" type="Node3D" parent="." unique_id=523219607]
@@ -304,6 +319,9 @@ use_collision = true
 collision_layer = 5
 collision_mask = 5
 size = Vector3(0.41412354, 4.7250977, 18.217773)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=648268283]
+environment = SubResource("Environment_g4v7s")
 
 [connection signal="timeout" from="sad_pumpkin/shoot_timer" to="sad_pumpkin" method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="sad_pumpkin/state_timer" to="sad_pumpkin" method="_on_state_timer_timeout"]

@@ -6,6 +6,7 @@ enum MovementMode { BODY, HEAD }
 @export var body_speed := 8.0
 @export var body_acceleration := 14.0
 @export var body_friction := 8.0
+@export var rotation_speed := TAU * 3.0
 
 @export var head_speed := 12.0
 @export var head_boost_speed := 22.0
@@ -20,6 +21,7 @@ enum MovementMode { BODY, HEAD }
 @export var body: Node3D
 @export var head: Node3D
 @export var mesh: Node3D
+@export var shadow: MeshInstance3D
 
 @onready var death_anim: Node3D = $Death
 
@@ -37,6 +39,7 @@ func _ready() -> void:
 	body.visible = true
 	head.visible = true
 	death_anim.visible = false
+	shadow.visible = false
 
 	update_movement_mode()
 
@@ -87,7 +90,7 @@ func process_body_movement(input_dir: Vector3, delta: float) -> void:
 
 	if input_dir.length_squared() > 0.0:
 		horizontal = horizontal.move_toward(target, body_acceleration * delta)
-		rotate_mesh(input_dir, delta)
+		rotate_mesh(input_dir, delta, rotation_speed)
 		anim.play("Idle_001")
 	else:
 		horizontal = horizontal.move_toward(Vector2.ZERO, body_friction * delta)
@@ -106,7 +109,7 @@ func process_head_movement(input_dir: Vector3, delta: float) -> void:
 	if input_dir.length_squared() == 0.0:
 		horizontal *= pow(head_drag, delta * 60.0)
 	else:
-		rotate_mesh(input_dir, delta)
+		rotate_mesh(input_dir, delta, head_rotation_speed)
 
 	velocity.x = horizontal.x
 	velocity.z = horizontal.y
@@ -120,14 +123,13 @@ func get_head_speed() -> float:
 	return head_speed
 
 
-func rotate_mesh(direction: Vector3, delta: float) -> void:
+func rotate_mesh(direction: Vector3, delta: float, rot_speed: float) -> void:
 	var target_angle := atan2(-direction.x, -direction.z)
-	var rotation_speed := TAU * 3.0
 
 	if movement_mode == MovementMode.HEAD:
 		rotation_speed = head_rotation_speed
 
-	mesh.rotation.y = rotate_toward(mesh.rotation.y, target_angle, rotation_speed * delta)
+	mesh.rotation.y = rotate_toward(mesh.rotation.y, target_angle, rot_speed * delta)
 
 
 func switch_movement_mode() -> void:
@@ -150,6 +152,11 @@ func update_movement_mode() -> void:
 
 	body.visible = not is_head
 	head.visible = true
+	
+	if is_head:
+		shadow.visible = true
+	else:
+		shadow.visible = false
 
 
 func _on_player_first_move() -> void:
