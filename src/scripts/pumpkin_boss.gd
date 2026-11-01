@@ -14,8 +14,11 @@ enum State {SHOOTING, CHASING}
 @onready var shoot_timer: Timer = $shoot_timer
 @onready var state_timer: Timer = $state_timer
 @export var camera: Camera3D
+@export var collider : CollisionShape3D
+@export var area_collider : CollisionShape3D
 
 var is_alive := true
+var player_dead := false
 
 @export var speed: float = 1.0
 
@@ -23,13 +26,21 @@ var is_alive := true
 @export var rotation_speed: float = 24
 
 func _ready() -> void:
+	player_dead = false
+	is_alive = false
 	anim.play("Bury")
 	visible = false
+	collider.disabled = true
+	area_collider.disabled = true
 
 func start_state():
 	visible = true
 	anim.play_backwards("Bury")
 	await anim.animation_finished 
+	collider.disabled = false
+	area_collider.disabled = false
+	is_alive = true
+	state_timer.start()
 	pick_state()
 
 
@@ -37,8 +48,9 @@ func start_state():
 func _process(delta: float) -> void:
 	if not player:
 		return
+	
 		
-	if is_alive:
+	if not player_dead:
 		var direction := player.global_position - global_position
 		direction.y = 0.0
 
@@ -116,6 +128,7 @@ func end_state():
 	queue_free()
 	
 func beat_player():
+	player_dead = true
 	is_alive = false
 	anim.stop()
 	state_timer.stop()

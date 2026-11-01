@@ -1321,9 +1321,9 @@ shadow = NodePath("Mesh/Flash/Shadow")
 
 [node name="shadow" type="HBoxContainer" parent="CanvasLayer" unique_id=333805156]
 offset_left = 14.0
-offset_top = 12.0
+offset_top = 852.0
 offset_right = 504.0
-offset_bottom = 121.0
+offset_bottom = 961.0
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/shadow" unique_id=122794474]
 layout_mode = 2
@@ -1342,9 +1342,9 @@ expand_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=935616881]
 offset_left = 14.0
-offset_top = 12.0
+offset_top = 852.0
 offset_right = 504.0
-offset_bottom = 121.0
+offset_bottom = 961.0
 
 [node name="heart" type="TextureRect" parent="CanvasLayer/HBoxContainer" unique_id=889615327]
 layout_mode = 2
@@ -1682,7 +1682,7 @@ stream = SubResource("AudioStreamWAV_kc20y")
 stream = SubResource("AudioStreamWAV_lsi8j")
 
 [node name="InvincibiltyTimer" type="Timer" parent="." unique_id=952853079]
-wait_time = 0.3
+wait_time = 0.6
 one_shot = true
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=1444534303]
