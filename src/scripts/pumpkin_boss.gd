@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name pumpkin_boss
 
 var is_chasing := false
 
@@ -16,8 +17,6 @@ enum State {SHOOTING, CHASING}
 
 var is_alive := true
 
-var state_machine: Node3D
-
 @export var speed: float = 1.0
 
 @export var acceleration: float = 10.0
@@ -26,7 +25,6 @@ var state_machine: Node3D
 func _ready() -> void:
 	anim.play("Bury")
 	visible = false
-	state_machine = get_tree().get_first_node_in_group("state")
 
 func start_state():
 	visible = true
@@ -94,7 +92,6 @@ func pick_state():
 	else:
 		current_state = State.CHASING
 	enter_state(current_state)
-	state_machine.remove_state_1_health(1)
 
 func enter_state(new_state: State) -> void:
 	match  new_state:

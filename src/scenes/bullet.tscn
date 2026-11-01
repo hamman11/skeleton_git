@@ -98,7 +98,7 @@ _data = {
 radius = 0.07714844
 height = 0.32278442
 
-[node name="Bullet" type="Area3D" unique_id=1066031854 node_paths=PackedStringArray("anim")]
+[node name="Bullet" type="Area3D" unique_id=1066031854 node_paths=PackedStringArray("anim") groups=["bullet"]]
 script = ExtResource("1_7jxxo")
 lifetime = 1.0
 anim = NodePath("bullet2/AnimationPlayer")
@@ -107,7 +107,6 @@ anim = NodePath("bullet2/AnimationPlayer")
 transform = Transform3D(0.31, 0, 0, 0, 0.31, 0, 0, 0, 0.31, 0, 0, 0)
 
 [node name="bullet" type="MeshInstance3D" parent="bullet2" unique_id=750105113]
-transform = Transform3D(0.9997494, 0.022384964, 0, -0.022384964, 0.9997494, 0, 0, 0, 1, -0.016220124, 0.0045711272, 0)
 mesh = SubResource("ArrayMesh_jvf6v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="bullet2" unique_id=1871333382]
