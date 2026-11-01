@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://41oyl83feai4"]
 
+[ext_resource type="Script" uid="uid://hited0ngyhrc" path="res://src/scripts/restart.gd" id="1_l20v2"]
+
 [node name="DeathScreen" type="Control" unique_id=910724399]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_l20v2")
 
 [node name="Button" type="Button" parent="." unique_id=173338075]
 layout_mode = 0

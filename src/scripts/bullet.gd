@@ -8,7 +8,7 @@ var direction := Vector3.FORWARD
 
 func _ready() -> void:
 	monitoring = true
-	anim.play("Start", -1, 4)
+	anim.play("Start", -1, 6)
 	await anim.animation_finished
 	anim.play("Idle")
 	get_tree().create_timer(lifetime).timeout.connect(queue_free)

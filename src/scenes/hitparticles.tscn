@@ -19,8 +19,8 @@ flatness = 0.505
 initial_velocity_min = 6.0
 initial_velocity_max = 8.0
 gravity = Vector3(0, -25, 0)
-scale_min = 0.7
-scale_max = 1.1999999
+scale_min = 0.5
+scale_max = 0.7
 scale_curve = SubResource("CurveTexture_ya6j6")
 
 [sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
