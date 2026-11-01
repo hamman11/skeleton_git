@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="skeleton"
+config/name="Skele-Head"
+config/version="67"
 run/main_scene="uid://dy1wel6pajt53"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://x5sigwks2nam"
 
 [display]
 

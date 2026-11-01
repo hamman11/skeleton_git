@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://joawdhns78kg"]
+
+[ext_resource type="Script" uid="uid://c66pfdf0mwvw2" path="res://src/scripts/win_screen.gd" id="1_nqjk1"]
+[ext_resource type="Script" uid="uid://hited0ngyhrc" path="res://src/scripts/restart.gd" id="2_dktyg"]
+
+[node name="win_screen" type="Control" unique_id=1920334961]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nqjk1")
+
+[node name="Button" type="Button" parent="." unique_id=516157305]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 695.0
+offset_right = 1017.0
+offset_bottom = 870.0
+theme_override_font_sizes/font_size = 122
+text = " Play Again? "
+script = ExtResource("2_dktyg")
+
+[node name="Label" type="Label" parent="." unique_id=2120159669]
+layout_mode = 0
+offset_left = 358.0
+offset_top = 80.0
+offset_right = 897.0
+offset_bottom = 242.0
+theme_override_font_sizes/font_size = 118
+text = "You Won!"
+
+[connection signal="pressed" from="Button" to="Button" method="_on_button_pressed"]
