@@ -2630,6 +2630,7 @@ mesh = SubResource("ArrayMesh_y2reh")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="FENCE" unique_id=1406366823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3378525, 1.2484131, -0.0126953125)
+visible = false
 transparency = 1.0
 mesh = SubResource("BoxMesh_g4v7s")
 
@@ -2640,6 +2641,7 @@ shape = SubResource("BoxShape3D_gbhdq")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="FENCE" unique_id=37536176]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.460789, 1.2484131, -0.0126953125)
+visible = false
 transparency = 1.0
 mesh = SubResource("BoxMesh_g4v7s")
 
@@ -2650,6 +2652,7 @@ shape = SubResource("BoxShape3D_y646j")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="FENCE" unique_id=660958447]
 transform = Transform3D(-4.371139e-08, 0, -1.0351304, 0, 1, 0, 1, 0, -4.5246985e-08, 0.06146855, 1.2484131, -9.412016)
+visible = false
 transparency = 1.0
 mesh = SubResource("BoxMesh_g4v7s")
 
@@ -2660,6 +2663,7 @@ shape = SubResource("BoxShape3D_lnbra")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="FENCE" unique_id=525050135]
 transform = Transform3D(-4.371139e-08, 0, -1.0351304, 0, 1, 0, 1, 0, -4.5246985e-08, 0.0614677, 1.2484131, 9.386625)
+visible = false
 transparency = 1.0
 mesh = SubResource("BoxMesh_g4v7s")
 
@@ -2669,7 +2673,7 @@ mesh = SubResource("BoxMesh_g4v7s")
 shape = SubResource("BoxShape3D_6emce")
 
 [node name="Target" parent="." unique_id=198745703 node_paths=PackedStringArray("target_manager") instance=ExtResource("8_lnbra")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38135743, 0.45540148, -7.3292303)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38135743, 0.45540148, -7.4441557)
 target_manager = NodePath("../TargetManager")
 
 [node name="Target2" parent="." unique_id=64368069 node_paths=PackedStringArray("target_manager") instance=ExtResource("8_lnbra")]
@@ -2840,16 +2844,6 @@ mesh = SubResource("ArrayMesh_i87o5")
 transform = Transform3D(1.3525863, 0, -1.1263189, 0, 1.7601374, 0, 1.1263189, 0, 1.3525863, 12.460979, -1.5280633, -23.99254)
 material_override = ExtResource("4_4ptq8")
 mesh = SubResource("ArrayMesh_i87o5")
-
-[node name="Label3D" type="Label3D" parent="." unique_id=2001536152]
-transform = Transform3D(1, 3.7855184e-08, 2.1855698e-08, -4.3711392e-08, 0.86602557, 0.50000006, -5.3290705e-15, -0.5, 0.8660256, 0.79478467, 3.095233, -6.74573)
-text = "Press space to switch modes"
-font_size = 174
-
-[node name="Label3D2" type="Label3D" parent="." unique_id=1436351652]
-transform = Transform3D(1, 3.7855184e-08, 2.1855698e-08, -4.3711392e-08, 0.86602557, 0.50000006, -5.3290705e-15, -0.5, 0.8660256, 0.7947846, 2.0464058, -6.140189)
-text = "Press right mouse to shoot"
-font_size = 174
 
 [connection signal="timeout" from="Pumpky/shoot_timer" to="Pumpky" method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="Pumpky/state_timer" to="Pumpky" method="_on_state_timer_timeout"]
